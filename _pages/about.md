@@ -1,11 +1,13 @@
 ---
 layout: page
-title: About Me
+title: About
 permalink: /about/
 ---
 
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
+I am a Research Scientist working on privacy-preserving technologies, causal inference, and experimentation platforms at Facebook.
 
-
-
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
+I hold a Ph.D. in Public Policy from the University of Chicago, where I studied Labor Economics, Public Economics, and Applied Microeconometrics.
+\
+\
+\
+<small>This website is powered by [fastpages](https://github.com/fastai/fastpages).</small>
