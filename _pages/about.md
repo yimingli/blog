@@ -6,7 +6,7 @@ permalink: /about/
 
 I am a Research Scientist working on privacy-preserving technologies, causal inference, and experimentation platforms at Facebook.
 
-I hold a Ph.D. from the University of Chicago, where I studied Labor Economics, Public Economics, and Applied Microeconometrics.
+I hold a Ph.D. in Public Policy from the University of Chicago, where I studied Labor Economics, Public Economics, and Applied Microeconometrics.
 \
 \
 \
