@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>控制变量是如何被”控制”的？ | Yiming (Paul) Li</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="控制变量是如何被”控制”的？" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="为什么自变量不同于控制变量？" />
+<meta property="og:description" content="为什么自变量不同于控制变量？" />
+<link rel="canonical" href="https://yimingli.net/what-are-we-talking-about-when-we-talk-about-control-variables.html" />
+<meta property="og:url" content="https://yimingli.net/what-are-we-talking-about-when-we-talk-about-control-variables.html" />
+<meta property="og:site_name" content="Yiming (Paul) Li" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-06-09T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://yimingli.net/what-are-we-talking-about-when-we-talk-about-control-variables.html","@type":"BlogPosting","headline":"控制变量是如何被”控制”的？","dateModified":"2019-06-09T00:00:00-05:00","datePublished":"2019-06-09T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://yimingli.net/what-are-we-talking-about-when-we-talk-about-control-variables.html"},"description":"为什么自变量不同于控制变量？","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://yimingli.net/feed.xml" title="Yiming (Paul) Li" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-49350925-1','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Yiming (Paul) Li</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">控制变量是如何被&quot;控制&quot;的？</h1><p class="page-description">为什么自变量不同于控制变量？</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2019-06-09T00:00:00-05:00" itemprop="datePublished">
+        Jun 9, 2019
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      1 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#statistics">statistics</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#causal inference">causal inference</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#control variables">control variables</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#covariates">covariates</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#DAG">DAG</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>注：下文是我在知乎的回答。原链接：<a href="https://www.zhihu.com/question/326199739/answer/710278097">https://www.zhihu.com/question/326199739/answer/710278097</a></p>
+
+<p><br />
+题主似乎问了两个问题。</p>
+
+<ol>
+  <li>回归中，自变量 X 和控制变量 Z 的地位应该是平等/对称的，为什么解释起来不一样？</li>
+  <li>回归系数的解释总是说「保持 Z 不变，1 个单位的 X 增加和 betaX 个单位的 y 增加相关联」，为什么回归系数能保持 Z 不变，原理是什么？</li>
+</ol>
+
+<p><strong>第一个问题</strong>，自变量 X 和控制变量 Z 在 OLS 算法的眼里确实是一样的，所以回归系数的机械解释也是一样的。假设我们的线性回归模型是 y = beta0 + betaX * X + betaZ * Z + u，其中 y 是年工资 (元），X 是上学年限（年），Z 是母亲上学年限（年）。betaX 和 betaZ 分别是 X 和 Z 的回归系数。</p>
+
+<ul>
+  <li>betaX 的解释是「如果母亲上学年限一样，平均来讲，多上一年学的小明比少上一年学的小红每年多赚 betaX 元」。</li>
+  <li>betaZ 的解释是「如果小明和小红的上学年限一样，但小明的妈妈比小红的妈妈多上一年学，平均来讲，小明的年工资比小红多 betaZ 元」。</li>
+</ul>
+
+<p>在这个意义上，「自变量」和「控制变量」只不过是「感兴趣变量」和「不怎么感兴趣变量」的不同标签。</p>
+
+<p>但上面的解释只是相关性，一旦涉及到因果解释，就要用到现实世界的因果模型，betaX 和 betaZ 的解释就不一样了。假设我们确信真实的因果模型如下图所示：</p>
+
+<p><img src="../images/control-variable-dag.jpeg" alt="Alt" /></p>
+
+<ul>
+  <li>自身的上学年限会影响自身的工资</li>
+  <li>母亲的上学年限会影响子女的上学年限，也会以除了子女教育以外的其他方式影响子女的收入（比如受教育程度高的母亲可能会更有意识的培养子女的软技能，从而影响子女工资）</li>
+  <li>祖母的上学年限会影响母亲的上学年限，也会以其他方式影响孙子孙女的工资（比如受教育程度高的祖母可能有更广的人脉，从而影响孙子孙女的工作和工资）</li>
+</ul>
+
+<p>在这个因果模型下，咱们的回归模型 y = beta0 + betaX * X + betaZ * Z + u 中 betaX 是因果解释：给定母亲的上学年限相同，平均来讲，每多上一年学能增加工资 betaX。这是因为加了母亲上学年限 Z 之后，X 和 u 就不相关了, E (Xu | Z) = 0，所以 betaX 是无偏的。而 betaZ 就只能是相关解释：我们不能说母亲每多上一年学，就能增加子女的工资 betaZ，只能说母亲的教育水平和子女的工资是正相关的（conditional on 子女的受教育水平），这是因为祖母上学年限在 u 里面，所以 Z 与 u 是相关的，E(Zu | X) != 0，betaZ 是有偏的。</p>
+
+<p>许多研究中，希望得到因果解释的那个变量就是「自变量」，而其他变量只是帮助自变量得到因果解释。所以控制变量有时候也被叫做 nuisance variable.</p>
+
+<p><strong>第二个问题</strong>，回归系数的解释总是说「保持 Z 不变，1 个单位的 X 增加和 betaX 个单位的 y 增加相关联」，为什么回归系数能保持 Z 不变，原理是什么？</p>
+
+<p>这个「保持 Z 不变」或者「控制 Z 在相同水平」的说法是从早期用回归分析实验的时候遗留下来的，适用于实验数据，并不适合观察数据。因为在实验中，你确实可以控制一个变量在不同个体之间不变，在观察数据中做不到。用观察数据做回归得出的回归系数，是平均上面再叠加平均，强行用「保持 Z 不变」来解释结果就很勉强。所以 Andrew Gelman 就建议不要用 control for Z，而是 (attempt to) adjust for Z. 「控制变量」(control variable) 叫做 「协变量」(covariate) 可能更恰当。</p>
+
+<p>至于回归是怎么 adjust for Z 的，参考其他几个答案。另外，Frisch–Waugh–Lovell theorem 了解一下，对理解最小方差回归的原理有帮助。沿用上面的例子简单说，就是把工资和自身上学年限中受到母亲教育影响的部分剔除，用剩下的部分做简单的相关分析。这个时候工资和上学年限的关系就不再受到母亲教育程度的影响，在这个意义上母亲教育程度的影响被「控制」住了。</p>
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="yimingli/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/what-are-we-talking-about-when-we-talk-about-control-variables.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Work in Progress</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://twitter.com/paulymli" title="paulymli"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
