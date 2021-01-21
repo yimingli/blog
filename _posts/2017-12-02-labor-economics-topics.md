@@ -11,7 +11,7 @@ categories: [economics, labor economics, occupational licensing, mobility, gende
 注：下文是我在知乎的回答。原链接：<https://www.zhihu.com/question/61126343/answer/269808062>
 
 \\
-每个国家的经济学家关注的问题都有所不同，我提几个在美国比较受关注的劳动经济学*实证*领域。
+每个国家的经济学家关注的问题都有所不同，我提几个近期在美国比较受关注的劳动经济学*实证*领域。
 
 ## 职业执照
 
